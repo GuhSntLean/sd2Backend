@@ -1,31 +1,38 @@
-package com.backend.entities;
+package com.backend.dto;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Table(name = "tb_product")
-public class Product implements Serializable {
-  private static final long serialVersionUID = 1L;
+import com.backend.entities.Product;
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDTO implements Serializable {
+
+  private static final long serialVersionUID = 1L;
+  
   private Long   id;
   private String name;
   private Double price;
   private String description;
   private String imageUri;
 
-  public Product(){}
+  public ProductDTO(){}
 
-  public Product(Long id, String name, Double price, String description, String imageUri){
-    super();
+  public ProductDTO(Product entity){
+    this.id           = entity.getId();
+    this.name         = entity.getName();
+    this.price        = entity.getPrice();
+    this.description  = entity.getDescription();
+    this.imageUri     = entity.getImageUri();
+  }
+
+
+  public ProductDTO(Long id, String name, Double price, String description, String imageUri){
     this.id           = id;
     this.name         = name;
     this.price        = price;
     this.description  = description;
     this.imageUri     = imageUri;
   }
+
 
   public Long getId() {
     return this.id;
@@ -65,20 +72,5 @@ public class Product implements Serializable {
 
   public void setImageUri(String imageUri) {
     this.imageUri = imageUri;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    Product product = (Product) o;
-
-    return id != null ? id.equals(product.id) : product.id == null;
-  }
-
-  @Override
-  public int hashCode() {
-    return id != null ? id.hashCode() : 0;
   }
 }
