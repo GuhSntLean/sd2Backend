@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Tirando o create sql
+create.sql
